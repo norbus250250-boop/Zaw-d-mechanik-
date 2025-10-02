@@ -1,31 +1,1442 @@
-<!DOCTYPE html>
-<html lang="pl">
+<script type="text/javascript">
+    function esql_home_url_watch(){
+            let el          = document.querySelector('.js-home-page-url-watch');
+            if(!el) return
+            let rect        = el.getBoundingClientRect();
+            let top         = rect.top;
+            let breakpoint  = window.innerHeight / 2;
+            let current_url = window.location.pathname;
+            let article_url = document.querySelector('.esql-article').dataset.url;
+            let home_url    = "/"
+
+            let IS_ARTICLE_VISIBLE = true;
+            let IS_HOME_VISIBLE    = false;
+            let IS_ARTICLE_URL     = true;
+            let IS_HOME_URL        = false
+
+            if( current_url == article_url ) {
+                IS_ARTICLE_URL = true;
+                IS_HOME_URL = false;
+            }
+            else if( current_url == home_url ) {
+                IS_ARTICLE_URL = false;
+                IS_HOME_URL = true;
+            }
+
+            if( top > breakpoint ){
+                IS_ARTICLE_VISIBLE = true;
+                IS_HOME_VISIBLE = false;
+            }
+            else {
+                IS_ARTICLE_VISIBLE = false;
+                IS_HOME_VISIBLE = true;
+            }
+
+            if(! app || !app.__vue__)
+                return;
+
+            if( IS_ARTICLE_VISIBLE && IS_HOME_URL ) {
+                window.history.pushState(null, null, article_url);
+                app.__vue__.$data.isHomePageVisible = false;
+            }
+            else if( IS_HOME_VISIBLE && IS_ARTICLE_URL ) {
+                window.history.pushState(null, null, home_url);
+                app.__vue__.$data.isHomePageVisible = true;
+            }
+    }
+
+    function esql_recommended_articles_watch(){
+        let article_content = document.querySelectorAll('.article-content')[0]
+        let article_content_rect = article_content.getBoundingClientRect()
+        let article_content_top  = article_content_rect.top;
+
+        try{
+            if( article_content_top < 0 ) {
+                app.__vue__.canRecommendedArticlesBeVisible = true;
+            }
+            else {
+                app.__vue__.canRecommendedArticlesBeVisible = false;
+            }
+        }
+        catch(e){}
+    }
+
+    document.addEventListener('scroll', ()=>{
+
+        esql_recommended_articles_watch();
+        esql_home_url_watch();
+
+    });
+
+
+</script>
+    <script>
+        ga('send', 'pageview', {
+            'dimension5': 'MOTO'
+        });
+    </script>
+
+<!doctype html>
+<html lang="pl-PL" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motoryzacja</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="prefetch" href="/wp-content/themes/sznyt/assets/fonts/akrobat-semibold.woff2" as="font">
+    <link rel="prefetch" href="/wp-content/themes/sznyt/assets/fonts/akrobat-extrabold.woff2" as="font">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="//securepubads.g.doubleclick.net">
+<link rel="dns-prefetch" href="//tpc.googlesyndication.com">
+<link rel="dns-prefetch" href="//www.google.com">
+<link rel="dns-prefetch" href="//www.googletagservices.com">
+<link rel="dns-prefetch" href="//google-analytics.com">
+<link rel="dns-prefetch" href="//graph.facebook.com">    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://sznyt.pl/backend/xmlrpc.php">
+    <link rel="stylesheet" href="https://sznyt.pl/wp-content/themes/sznyt/assets/css/style.css?ver=1.5.16">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/favicon-196x196.png" sizes="196x196" />
+<link rel="icon" type="image/png" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/favicon-128.png" sizes="128x128" />
+<meta name="application-name" content="&nbsp;"/>
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/mstile-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="https://sznyt.pl/wp-content/themes/sznyt/assets/images/favicon/mstile-310x310.png" />
+    <title>Usportowione modele samochodów - ulubione i te, na które czekamy - Sznyt.pl</title>
+<meta name='robots' content='max-image-preview:large' />
+
+<!-- This site is optimized with the Yoast SEO plugin v4.9 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="https://sznyt.pl/2020/03/03/najlepsze-usportowione-modele-samochodow/" />
+<meta property="og:locale" content="pl_PL" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Usportowione modele samochodów - ulubione i te, na które czekamy - Sznyt.pl" />
+<meta property="og:description" content="W związku z premierą nowych modeli Alfy Romeo, robimy przegląd ulubionych usportowionych wersji aut. Oto nasza subiektywna lista! Alfa Romeo Giulia GTA i GTAm Mówi się, że nowe Alfy to legenda z technologią zaczerpnięta z Formuły 1. Dlaczego? Modele GTA i GTAm zostały oparte na flagowym modelu marki, czyli Giulii Quadrifoglio. Pierwszy z nich to tzw. &hellip;" />
+<meta property="og:url" content="https://sznyt.pl/2020/03/03/najlepsze-usportowione-modele-samochodow/" />
+<meta property="og:site_name" content="Sznyt.pl" />
+<meta property="article:publisher" content="https://www.facebook.com/sznytpl/" />
+<meta property="article:tag" content="ALFA ROMEO" />
+<meta property="article:tag" content="auta" />
+<meta property="article:tag" content="gta" />
+<meta property="article:tag" content="moto" />
+<meta property="article:tag" content="RS" />
+<meta property="article:tag" content="sportowe wersje" />
+<meta property="article:section" content="MOTO" />
+<meta property="article:published_time" content="2020-03-03T10:59:21+01:00" />
+<meta property="article:modified_time" content="2020-03-04T15:55:56+01:00" />
+<meta property="og:updated_time" content="2020-03-04T15:55:56+01:00" />
+<meta property="fb:app_id" content="372157159866331" />
+<meta property="og:image" content="https://sznyt.pl/wp-content/uploads/2020/03/HP.jpg" />
+<meta property="og:image:width" content="5315" />
+<meta property="og:image:height" content="3543" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:description" content="W związku z premierą nowych modeli Alfy Romeo, robimy przegląd ulubionych usportowionych wersji aut. Oto nasza subiektywna lista! Alfa Romeo Giulia GTA i GTAm Mówi się, że nowe Alfy to legenda z technologią zaczerpnięta z Formuły 1. Dlaczego? Modele GTA i GTAm zostały oparte na flagowym modelu marki, czyli Giulii Quadrifoglio. Pierwszy z nich to tzw. [&hellip;]" />
+<meta name="twitter:title" content="Usportowione modele samochodów - ulubione i te, na które czekamy - Sznyt.pl" />
+<meta name="twitter:image" content="https://sznyt.pl/wp-content/uploads/2020/03/HP.jpg" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Sznyt.pl &raquo; Kanał z wpisami" href="https://sznyt.pl/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Sznyt.pl &raquo; Kanał z komentarzami" href="https://sznyt.pl/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Sznyt.pl &raquo; Usportowione modele samochodów &#8211; ulubione i te, na które czekamy Kanał z komentarzami" href="https://sznyt.pl/2020/03/03/najlepsze-usportowione-modele-samochodow/feed/" />
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/sznyt.pl\/backend\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9.9"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="https://api.w.org/" href="https://sznyt.pl/wp-json/" /><link rel="alternate" type="application/json" href="https://sznyt.pl/wp-json/wp/v2/posts/25814" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://sznyt.pl/backend/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://sznyt.pl/backend/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9.9" />
+<link rel='shortlink' href='https://sznyt.pl/?p=25814' />
+<link rel="alternate" type="application/json+oembed" href="https://sznyt.pl/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsznyt.pl%2F2020%2F03%2F03%2Fnajlepsze-usportowione-modele-samochodow%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://sznyt.pl/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsznyt.pl%2F2020%2F03%2F03%2Fnajlepsze-usportowione-modele-samochodow%2F&#038;format=xml" />
+<link rel="pingback" href="https://sznyt.pl/backend/xmlrpc.php"><style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3399102-30', 'auto');
+    ga('send', 'pageview');
+
+</script>    <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+    <script>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    </script>
+
+    <script>
+    googletag.cmd.push(function() {
+
+    var mapping = googletag.sizeMapping().
+        addSize([320, 400], [[300, 250], [300,300],[340, 250],[340, 300], [300, 600]]).
+        addSize([750, 200], [[750, 300], [750, 200], [750, 100]]).
+        addSize([1050, 350], [[1180, 200], [1160, 380], [1160, 600], [750, 380], [750, 600], [1140, 100], [750, 400], [1160, 400], [1180, 380], [1140, 600], [1140, 400], [1160, 200], [1200, 300], [1200, 600], [1200, 100], [1140, 200], [750, 200], [1200, 380], [1180, 300], [1160, 300], [1180, 100], [1200, 400], [1160, 100], [750, 100], [1180, 600], [750, 300], [1140, 380], [1200, 200], [1140, 300], [1180, 400]]).
+        build();
+
+    var mappingHalfPage = googletag.sizeMapping().addSize([320, 400], [[300, 250], [300,300],[340, 250],[340, 300]]).addSize([1050, 350], [[300, 250], [300, 600]]).build();
+
+    googletag.defineSlot('/159261070/sznyt_bill1', [[1180, 200], [1160, 380], [1160, 600], [300, 600], [750, 380], [750, 600], [1140, 100], [750, 400], [1160, 400], [1180, 380], [1140, 600], [300, 250], [1140, 400], [1160, 200], [1200, 300], [1200, 600], [1200, 100], [1140, 200], [300, 300], [750, 200], [1200, 380], [340, 250], [1180, 300], [1160, 300], [1180, 100], [1200, 400], [340, 300], [1160, 100], [750, 100], [1180, 600], [750, 300], [1140, 380], [1200, 200], [1140, 300], [1180, 400]], 'dfp-sznyt-bill1').defineSizeMapping(mapping).addService(googletag.pubads())
+    googletag.defineSlot('/159261070/sznyt_bill2', [[1180, 200], [1160, 380], [1160, 600], [300, 600], [750, 380], [1024, 768], [750, 600], [1140, 100], [750, 400], [1160, 400], [1180, 380], [1140, 600], [300, 250], [1140, 400], [1160, 200], [1200, 300], [1200, 600], [1200, 100], [1140, 200], [300, 300], [750, 200], [1200, 380], [340, 250], [1180, 300], [1160, 300], [1180, 100], [1200, 400], [340, 300], [1160, 100], [750, 100], [1180, 600], [750, 300], [1140, 380], [1200, 200], [1140, 300], [1180, 400]], 'dfp-sznyt-bill2').defineSizeMapping(mapping).addService(googletag.pubads())
+    googletag.defineSlot('/159261070/sznyt_half', [[340, 250], [340, 300], [300, 300], [300, 600], [300, 250]], 'dfp-sznyt-half').defineSizeMapping(mapping).addService(googletag.pubads());
+    googletag.defineSlot('/159261070/sznyt_halfpageRight', [300, 600], 'dfp-sznyt-half-right').addService(googletag.pubads());
+    googletag.defineSlot('/159261070/sznyt_halfpageLeft', [300, 600], 'dfp-sznyt-half-left').addService(googletag.pubads());
+    googletag.defineSlot('/159261070/sznyt_halpageSG', [[300, 600], [300, 250]], 'dfp-sznyt-half-sg').defineSizeMapping(mappingHalfPage).addService(googletag.pubads());
+
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().collapseEmptyDivs();
+    // googletag.pubads().setTargeting('Stage', [window.location.hostname]);
+    googletag.pubads().disableInitialLoad();
+    googletag.enableServices();
+    });
+    window.onload = function() {
+        googletag.pubads().refresh();
+    };
+    </script>
+
 </head>
-<body>
-    <header>
-        <img src="images/logo.png" alt="Logo" class="logo">
-        <nav>
-            <ul>
-                <li><a href="index.html">Strona główna</a></li>
-                <li><a href="modele.html">Modele</a></li>
-                <li><a href="galeria.html">Galeria</a></li>
-                <li><a href="kontakt.html">Kontakt</a></li>
+<body class="post-template-default single single-post postid-25814 single-format-standard group-blog">
+
+<style>
+    #dfp-sznyt-half-left,#dfp-sznyt-half-right{position:absolute;width:300px;height:600px;z-index:0;overflow:hidden;top:149px}#dfp-sznyt-half-right{left:50%;margin-left:-890px}#dfp-sznyt-half-left{left:50%;margin-left:590px}#dfp-sznyt-half-left.fixed,#dfp-sznyt-half-right.fixed{position:fixed;top:64px}@media  all and (max-width:1200px){#dfp-sznyt-half-left,#dfp-sznyt-half-right{display:none}}
+</style>
+
+<script>
+  function stickyHalf(el){var half=document.getElementById(el);(window.scrollY>=84)?half.classList.add('fixed'):half.classList.remove('fixed')}
+</script>
+
+<div id="dfp-sznyt-half-right">
+    <script>
+      googletag.cmd.push(function() { googletag.display('dfp-sznyt-half-right'); });
+      window.addEventListener('scroll', function(){stickyHalf('dfp-sznyt-half-right')});
+      stickyHalf('dfp-sznyt-half-right');
+    </script>
+</div>
+
+<div id="dfp-sznyt-half-left">
+    <script>
+      googletag.cmd.push(function() { googletag.display('dfp-sznyt-half-right'); });
+      window.addEventListener('scroll', function(){stickyHalf('dfp-sznyt-half-left')});
+      stickyHalf('dfp-sznyt-half-left');
+    </script>
+</div>
+<!-- cache -->
+<div id="app">
+    
+    <div class="bar" v-bind:class="{'bar--with-facebook': showFacebookHeader}">
+    <div class="container">
+        <a href="#" class="hamburger is-hidden-tablet hamburger-triger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+        <nav class="bar-left">
+            <div class="menu-top-container"><ul id="menu-top" class="bar-nav"><li id="menu-item-966" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-966"><a href="https://sznyt.pl/o-nas/">O nas</a></li>
+<li id="menu-item-967" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-967"><a href="https://sznyt.pl/kontakt/">Kontakt</a></li>
+<li id="menu-item-1075" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1075"><a href="http://nowymarketing.pl">NowyMarketing</a></li>
+<li id="menu-item-1076" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1076"><a href="http://mamstartup.pl">MamStartup</a></li>
+<li id="menu-item-1077" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1077"><a href="http://antyweb.pl">Antyweb</a></li>
+<li id="menu-item-10234" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10234"><a href="https://sznyt.pl/reklama/">Reklama</a></li>
+</ul></div>        </nav>
+        <div class="bar-center is-hidden-tablet">
+            <a href="/">
+                <img height="25" src="https://sznyt.pl/wp-content/themes/sznyt/assets/images/sznyt-logo.svg" alt="Sznyt.pl">
+            </a> 
+        </div>
+
+        <div class="bar-facebook">
+            <facebook-button></facebook-button>
+        </div>
+
+        <div class="bar-right is-flex-right">
+           
+            <ul class="bar-nav">
+                <li>
+                    <a href="" class="bar-nav-icon" @click.prevent="toggleSearchBox">
+                        <i class="fa fa-search"></i>
+                        <span class="is-hidden-mobile">
+                            szukaj
+                        </span>
+                    </a>
+                </li>
+                <li class="is-hidden-mobile">
+                    <a href="https://www.facebook.com/sznytpl/" class="bar-nav-icon" target="_blank">
+
+                        <i class="fa fa-facebook"></i>
+                        facebook
+                    </a>
+                </li>
+                <li class="is-hidden-mobile">
+                    <a href="https://www.instagram.com/sznyt.pl/" class="bar-nav-icon" target="_blank">
+                        <i class="fa fa-instagram"></i>
+                        instagram
+                    </a>
+                </li>
             </ul>
+        </div>
+    </div>
+</div>
+<div class="top-bar__placeholder"></div>
+<div class="mobile-menu">
+    <!--<div class="bar">-->
+        <!--<div>-->
+            <!--<ul class="bar-nav">-->
+                <!--<li>-->
+                    <!--<a href="" class="bar-nav-icon">-->
+                        <!--<i class="fa fa-facebook"></i>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="" class="bar-nav-icon">-->
+                        <!--<i class="fa fa-instagram"></i>-->
+                    <!--</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="bar-right is-flex-right">-->
+            <!--<a href="#" class="hamburger is-light is-small is-opened hamburger-triger">-->
+                <!--<span></span>-->
+                <!--<span></span>-->
+                <!--<span></span>-->
+            <!--</a>-->
+        <!--</div>-->
+    <!--</div>-->
+            <a href="#" class="hamburger is-light is-opened hamburger-triger mobile-menu__close-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+    <div class="mobile-menu-content">
+        <div class="menu-mobile-container"><ul id="menu-mobile" class=""><li id="menu-item-765" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-765"><a href="https://sznyt.pl/kategoria/motoryzacja/">MOTO</a></li>
+<li id="menu-item-767" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-767"><a href="https://sznyt.pl/kategoria/stylzycia/">STYL ŻYCIA</a></li>
+<li id="menu-item-764" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-764"><a href="https://sznyt.pl/kategoria/moda/">MODA</a></li>
+<li id="menu-item-768" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-768"><a href="https://sznyt.pl/kategoria/technologia/">TECH</a></li>
+<li id="menu-item-2673" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2673"><a href="https://sznyt.pl/kategoria/stylzycia/podroze/">PODRÓŻE</a></li>
+<li id="menu-item-763" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-763"><a href="https://sznyt.pl/kategoria/kultura/">KULTURA</a></li>
+<li id="menu-item-766" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-766"><a href="https://sznyt.pl/kategoria/sport/">SPORT</a></li>
+<li id="menu-item-762" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-762"><a href="https://sznyt.pl/kategoria/design/">DESIGN</a></li>
+<li id="menu-item-10567" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10567"><a href="https://sznyt.pl/kontakt/">Kontakt</a></li>
+</ul></div>        <div class="mobile-menu-content-bg"></div>
+    </div>
+
+</div>
+<affix class="header-affixed" :after="true">
+            <header class="header" v-bind:class="{'show-facebook': showFacebookHeader}">
+        <div class="container">
+        <div class="header-brand">
+            <a href="/">
+                <img src="https://sznyt.pl/wp-content/themes/sznyt/assets/images/sznyt-logo.svg" alt="">
+            </a>
+        </div>
+        <nav class="header-navbar">
+            <div class="menu-glowne-container"><ul id="menu-glowne" class="header-navbar-nav"><li id="menu-item-373" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-373"><a href="https://sznyt.pl/kategoria/motoryzacja/">MOTO</a>
+        <div class="header-navbar-nav-submenu ">
+            <div class="header-navbar-nav-submenu-header">
+                <h4 class="title">MOTO</h4>
+                <a href="https://sznyt.pl/kategoria/motoryzacja/" class="is-flex-right header-navbar-nav-submenu-header-all-link">Zobacz wszystkie</a>
+            </div>
+            <div class="header-navbar-nav-submenu-content">
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/12/07/toyota-bz4x-tak-wyglada-przyszlosc/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/12/PL_Toyota_bZ4X_2023x1099_Sellout_December_v6-364x190.jpg"
+                                         alt="Toyota bZ4X - tak wygląda przyszłość?">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/12/07/toyota-bz4x-tak-wyglada-przyszlosc/">Toyota bZ4X - tak wygląda przyszłość?</a>
+                        </h5>
+                        <small class="menu-post__date">7 grudnia 2023</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/08/24/romantyczna-odslona-rolls-roycea-jedyne-w-swoim-rodzaju-la-rose-noire-droptail/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/08/P90519236_lowRes_rolls-royce-la-rose--364x190.jpg"
+                                         alt="Romantyczna odsłona Rolls Roycea - jedyne w swoim rodzaju La Rose Noire Droptail">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/08/24/romantyczna-odslona-rolls-roycea-jedyne-w-swoim-rodzaju-la-rose-noire-droptail/">Romantyczna odsłona Rolls Royce'a - jedyne w swoim rodzaju La Rose Noire Droptail</a>
+                        </h5>
+                        <small class="menu-post__date">24 sierpnia 2023</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/08/16/bmw/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/08/glowne-1-364x190.png"
+                                         alt="Hybryda rodzinnego auta ze sportową bestią? Nasze wrażenia po jeździe BMW M3 Touring">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/08/16/bmw/">Hybryda rodzinnego auta ze sportową bestią? Nasze wrażenia po jeździe BMW M3 Touring</a>
+                        </h5>
+                        <small class="menu-post__date">16 sierpnia 2023</small>
+                    </article>
+                            </div>
+        </div>
+        </li>
+<li id="menu-item-604" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-604"><a href="https://sznyt.pl/kategoria/stylzycia/">LIFESTYLE</a>
+        <div class="header-navbar-nav-submenu ">
+            <div class="header-navbar-nav-submenu-header">
+                <h4 class="title">LIFESTYLE</h4>
+                <a href="https://sznyt.pl/kategoria/stylzycia/" class="is-flex-right header-navbar-nav-submenu-header-all-link">Zobacz wszystkie</a>
+            </div>
+            <div class="header-navbar-nav-submenu-content">
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2024/03/22/bioceramic-moonswatch-mission-moonphase-wyladowal/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2024/03/sc01_24_BioceramicMoonSwatch_MissionToTheMoonphase_close-up-moonphase-night-364x190.jpg"
+                                         alt="Bioceramic MoonSwatch MISSION TO THE MOONPHASE wylądował">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2024/03/22/bioceramic-moonswatch-mission-moonphase-wyladowal/">Bioceramic MoonSwatch MISSION TO THE MOONPHASE wylądował</a>
+                        </h5>
+                        <small class="menu-post__date">22 marca 2024</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2024/03/22/edc-wedlug-sznyt-gdzie-styl-spotyka-funkcjonalnosc/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2024/03/taylor-kopel-DkH2X5NzHnc-unsplash-364x190.jpg"
+                                         alt="EDC według Sznyt – gdzie styl spotyka funkcjonalność">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2024/03/22/edc-wedlug-sznyt-gdzie-styl-spotyka-funkcjonalnosc/">EDC według Sznyt – gdzie styl spotyka funkcjonalność</a>
+                        </h5>
+                        <small class="menu-post__date">22 marca 2024</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2024/02/19/podroz-przez-japonskie-pory-roku-odkryj-ich-esencje-w-niezwyklym-przewodniku-roku-gin-pairing-guide/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2024/02/gin-364x190.jpg"
+                                         alt="Podróż przez japońskie pory roku – odkryj ich esencję w niezwykłym przewodniku „Roku Gin Pairing Guide”">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2024/02/19/podroz-przez-japonskie-pory-roku-odkryj-ich-esencje-w-niezwyklym-przewodniku-roku-gin-pairing-guide/">Podróż przez japońskie pory roku – odkryj ich esencję w niezwykłym przewodniku „Roku Gin Pairing Guide”</a>
+                        </h5>
+                        <small class="menu-post__date">19 lutego 2024</small>
+                    </article>
+                            </div>
+        </div>
+        </li>
+<li id="menu-item-586" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-586"><a href="https://sznyt.pl/kategoria/moda/">MODA</a>
+        <div class="header-navbar-nav-submenu ">
+            <div class="header-navbar-nav-submenu-header">
+                <h4 class="title">MODA</h4>
+                <a href="https://sznyt.pl/kategoria/moda/" class="is-flex-right header-navbar-nav-submenu-header-all-link">Zobacz wszystkie</a>
+            </div>
+            <div class="header-navbar-nav-submenu-content">
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2024/03/22/bioceramic-moonswatch-mission-moonphase-wyladowal/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2024/03/sc01_24_BioceramicMoonSwatch_MissionToTheMoonphase_close-up-moonphase-night-364x190.jpg"
+                                         alt="Bioceramic MoonSwatch MISSION TO THE MOONPHASE wylądował">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2024/03/22/bioceramic-moonswatch-mission-moonphase-wyladowal/">Bioceramic MoonSwatch MISSION TO THE MOONPHASE wylądował</a>
+                        </h5>
+                        <small class="menu-post__date">22 marca 2024</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2024/02/27/fauna-flora-w-modzie-kwieciste-nowosci-wprost-ze-sklepu-odziezowego/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2024/02/2fc0cdc3811f9570e0d45c1160c67204f40a16d9-364x190.jpg"
+                                         alt="Fauna i flora w modzie: kwieciste nowości wprost ze sklepu odzieżowego">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2024/02/27/fauna-flora-w-modzie-kwieciste-nowosci-wprost-ze-sklepu-odziezowego/">Fauna i flora w modzie: kwieciste nowości wprost ze sklepu odzieżowego</a>
+                        </h5>
+                        <small class="menu-post__date">27 lutego 2024</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/11/17/buty-damskie-na-jesien-styl-komfort-funkcjonalnosc-w-jednym/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/11/buty-damskie-na-jesien-styl-komfort-i-funkcjonalnosc-w-jednym-364x190.jpg"
+                                         alt="Buty damskie na jesień - styl, komfort i funkcjonalność w jednym">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/11/17/buty-damskie-na-jesien-styl-komfort-funkcjonalnosc-w-jednym/">Buty damskie na jesień - styl, komfort i funkcjonalność w jednym</a>
+                        </h5>
+                        <small class="menu-post__date">17 listopada 2023</small>
+                    </article>
+                            </div>
+        </div>
+        </li>
+<li id="menu-item-2672" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2672"><a href="https://sznyt.pl/kategoria/stylzycia/podroze/">PODRÓŻE</a>
+        <div class="header-navbar-nav-submenu ">
+            <div class="header-navbar-nav-submenu-header">
+                <h4 class="title">PODRÓŻE</h4>
+                <a href="https://sznyt.pl/kategoria/stylzycia/podroze/" class="is-flex-right header-navbar-nav-submenu-header-all-link">Zobacz wszystkie</a>
+            </div>
+            <div class="header-navbar-nav-submenu-content">
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/01/04/w-japonii-otwarto-ghibli-park-park-tematyczny-poswiecony-najslynniejszym-anime/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/01/img09-364x190.jpg"
+                                         alt="W Japonii powstał Ghibli Park - park tematyczny poświęcony najsłynniejszym anime">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/01/04/w-japonii-otwarto-ghibli-park-park-tematyczny-poswiecony-najslynniejszym-anime/">W Japonii powstał Ghibli Park - park tematyczny poświęcony najsłynniejszym anime</a>
+                        </h5>
+                        <small class="menu-post__date">4 stycznia 2023</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2022/10/19/ritz-carlton-debiutuje-z-kolekcja-luksusowych-jachtow/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2022/10/zdj4-1-364x190.jpg"
+                                         alt="Ritz-Carlton debiutuje z kolekcją luksusowych jachtów">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2022/10/19/ritz-carlton-debiutuje-z-kolekcja-luksusowych-jachtow/">Ritz-Carlton debiutuje z kolekcją luksusowych jachtów</a>
+                        </h5>
+                        <small class="menu-post__date">19 października 2022</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2022/08/05/boom-supersonic-overture-tak-bedzie-sie-prezentowal-nowoczesny-ponaddzwiekowy-samolot/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2022/08/overture-reveal-fuselage-364x190.jpg"
+                                         alt="Boom Supersonic Overture – tak będzie się prezentował nowoczesny ponaddźwiękowy samolot">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2022/08/05/boom-supersonic-overture-tak-bedzie-sie-prezentowal-nowoczesny-ponaddzwiekowy-samolot/">Boom Supersonic Overture – tak będzie się prezentował nowoczesny ponaddźwiękowy samolot</a>
+                        </h5>
+                        <small class="menu-post__date">5 sierpnia 2022</small>
+                    </article>
+                            </div>
+        </div>
+        </li>
+<li id="menu-item-590" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-590"><a href="https://sznyt.pl/kategoria/technologia/">TECH</a>
+        <div class="header-navbar-nav-submenu ">
+            <div class="header-navbar-nav-submenu-header">
+                <h4 class="title">TECH</h4>
+                <a href="https://sznyt.pl/kategoria/technologia/" class="is-flex-right header-navbar-nav-submenu-header-all-link">Zobacz wszystkie</a>
+            </div>
+            <div class="header-navbar-nav-submenu-content">
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2024/03/22/edc-wedlug-sznyt-gdzie-styl-spotyka-funkcjonalnosc/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2024/03/taylor-kopel-DkH2X5NzHnc-unsplash-364x190.jpg"
+                                         alt="EDC według Sznyt – gdzie styl spotyka funkcjonalność">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2024/03/22/edc-wedlug-sznyt-gdzie-styl-spotyka-funkcjonalnosc/">EDC według Sznyt – gdzie styl spotyka funkcjonalność</a>
+                        </h5>
+                        <small class="menu-post__date">22 marca 2024</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/09/01/akustyczne-estetyczne-arcydziela-testujemy-glosniki-sonos-era-100-sonos-era-300/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/08/sonos-sznyt9-1-364x190.jpg"
+                                         alt="Akustyczne arcydzieła? Testujemy głośniki Sonos Era 100 i Sonos Era 300">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/09/01/akustyczne-estetyczne-arcydziela-testujemy-glosniki-sonos-era-100-sonos-era-300/">Akustyczne arcydzieła? Testujemy głośniki Sonos Era 100 i Sonos Era 300</a>
+                        </h5>
+                        <small class="menu-post__date">1 września 2023</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/07/25/sluchawki-dla-kinomana-dla-milosnika-muzyki-testujemy-modele-jabra-4-jabra-5/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/07/glowne2-364x190.png"
+                                         alt="Słuchawki dla kinomana, miłośnika muzyki... i nie tylko. Testujemy modele Jabra 4 i Jabra 5">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/07/25/sluchawki-dla-kinomana-dla-milosnika-muzyki-testujemy-modele-jabra-4-jabra-5/">Słuchawki dla kinomana, miłośnika muzyki... i nie tylko. Testujemy modele Jabra 4 i Jabra 5</a>
+                        </h5>
+                        <small class="menu-post__date">25 lipca 2023</small>
+                    </article>
+                            </div>
+        </div>
+        </li>
+<li id="menu-item-585" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-585"><a href="https://sznyt.pl/kategoria/kultura/">KULTURA</a>
+        <div class="header-navbar-nav-submenu ">
+            <div class="header-navbar-nav-submenu-header">
+                <h4 class="title">KULTURA</h4>
+                <a href="https://sznyt.pl/kategoria/kultura/" class="is-flex-right header-navbar-nav-submenu-header-all-link">Zobacz wszystkie</a>
+            </div>
+            <div class="header-navbar-nav-submenu-content">
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/06/30/juz-wkrotce-na-ekranach-animacja-malarska-chlopi/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/06/z29921276AMPFilm-Chlopi-produkowani-w-technice-animacji-mala-364x190.jpg"
+                                         alt="W sieci pojawił się zwiastun malarskiego filmu Chłopi ">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/06/30/juz-wkrotce-na-ekranach-animacja-malarska-chlopi/">W sieci pojawił się zwiastun malarskiego filmu "Chłopi" </a>
+                        </h5>
+                        <small class="menu-post__date">30 czerwca 2023</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/04/24/cracow-art-week-juz-12-maja/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/04/335603059_2214759088913083_7408765365020550807_n-364x190.png"
+                                         alt="Cracow Art Week już 12 maja!">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/04/24/cracow-art-week-juz-12-maja/">Cracow Art Week już 12 maja!</a>
+                        </h5>
+                        <small class="menu-post__date">24 kwietnia 2023</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/04/06/w-sieci-pojawil-sie-zwiastun-filmu-barbie/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/04/ggg-364x190.png"
+                                         alt="W sieci pojawił się zwiastun filmu Barbie">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/04/06/w-sieci-pojawil-sie-zwiastun-filmu-barbie/">W sieci pojawił się zwiastun filmu "Barbie"</a>
+                        </h5>
+                        <small class="menu-post__date">6 kwietnia 2023</small>
+                    </article>
+                            </div>
+        </div>
+        </li>
+<li id="menu-item-595" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-595"><a href="https://sznyt.pl/kategoria/sport/">SPORT</a>
+        <div class="header-navbar-nav-submenu ">
+            <div class="header-navbar-nav-submenu-header">
+                <h4 class="title">SPORT</h4>
+                <a href="https://sznyt.pl/kategoria/sport/" class="is-flex-right header-navbar-nav-submenu-header-all-link">Zobacz wszystkie</a>
+            </div>
+            <div class="header-navbar-nav-submenu-content">
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/03/28/mistrzowska-wspolpraca-szymon-marciniak-ambasadorem-lancerto/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/03/LANCERTO_Szymon-Marciniak-364x190.jpg"
+                                         alt="Mistrzowska współpraca – Szymon Marciniak ambasadorem  LANCERTO">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/03/28/mistrzowska-wspolpraca-szymon-marciniak-ambasadorem-lancerto/">Mistrzowska współpraca – Szymon Marciniak ambasadorem  LANCERTO</a>
+                        </h5>
+                        <small class="menu-post__date">28 marca 2023</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2022/09/01/nike-prezentuje-stroj-sereny-williams-z-finalu-us-open-ozdobiony-diamentami/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2022/09/https-hypebeast.com-image-2022-08-serena-williams-flushing-meadows-diamond-pe-nikecourt-flare-2-us-open-outfit-01-364x190.jpg"
+                                         alt="Nike prezentuje strój Sereny Williams z US Open. Komplet jest zdobiony diamentami">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2022/09/01/nike-prezentuje-stroj-sereny-williams-z-finalu-us-open-ozdobiony-diamentami/">Nike prezentuje strój Sereny Williams z US Open. Komplet jest zdobiony diamentami</a>
+                        </h5>
+                        <small class="menu-post__date">1 września 2022</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2022/08/30/smartwatch-ktory-motywuje-dzialania-jak-zaden-inny-sequent-prezentuje-smartass-watch/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2022/08/zdjgl-364x190.jpg"
+                                         alt="Smartwatch, który motywuje do działania jak żaden inny. Sequent prezentuje Smart(Ass) Watch">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2022/08/30/smartwatch-ktory-motywuje-dzialania-jak-zaden-inny-sequent-prezentuje-smartass-watch/">Smartwatch, który motywuje do działania jak żaden inny. Sequent prezentuje Smart(Ass) Watch</a>
+                        </h5>
+                        <small class="menu-post__date">30 sierpnia 2022</small>
+                    </article>
+                            </div>
+        </div>
+        </li>
+<li id="menu-item-598" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-598"><a href="https://sznyt.pl/kategoria/design/">DESIGN</a>
+        <div class="header-navbar-nav-submenu ">
+            <div class="header-navbar-nav-submenu-header">
+                <h4 class="title">DESIGN</h4>
+                <a href="https://sznyt.pl/kategoria/design/" class="is-flex-right header-navbar-nav-submenu-header-all-link">Zobacz wszystkie</a>
+            </div>
+            <div class="header-navbar-nav-submenu-content">
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2024/03/22/bioceramic-moonswatch-mission-moonphase-wyladowal/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2024/03/sc01_24_BioceramicMoonSwatch_MissionToTheMoonphase_close-up-moonphase-night-364x190.jpg"
+                                         alt="Bioceramic MoonSwatch MISSION TO THE MOONPHASE wylądował">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2024/03/22/bioceramic-moonswatch-mission-moonphase-wyladowal/">Bioceramic MoonSwatch MISSION TO THE MOONPHASE wylądował</a>
+                        </h5>
+                        <small class="menu-post__date">22 marca 2024</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/03/17/tomasz-osman-savicki-phygital-jest-teraz-trendem-w-branzy-jubilerskiej/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/03/sawicki-364x190.png"
+                                         alt="Tomasz Osman (SAVICKI): Phygital jest teraz trendem w branży jubilerskiej">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/03/17/tomasz-osman-savicki-phygital-jest-teraz-trendem-w-branzy-jubilerskiej/">Tomasz Osman (SAVICKI): Phygital jest teraz trendem w branży jubilerskiej</a>
+                        </h5>
+                        <small class="menu-post__date">17 marca 2023</small>
+                    </article>
+                                                        <article class="post is-menu-art menu-post">
+                        <figure class="menu-post__image">
+                                                            <a href="/2023/02/28/project-mondo-g-czyli-terenowy-mercedes-w-luksusowym-stylu-moncler/">
+                                    <span class="post-overlay"></span>
+                                    <img src="https://sznyt.pl/wp-content/uploads/2023/02/moncler-1-364x190.jpg"
+                                         alt="„Project Mondo G”, czyli terenowy Mercedes w luksusowym stylu Moncler">
+                                </a>
+                                                    </figure>
+
+                        <h5 class="is-7 menu-post__title">
+                            <a href="/2023/02/28/project-mondo-g-czyli-terenowy-mercedes-w-luksusowym-stylu-moncler/">„Project Mondo G”, czyli terenowy Mercedes w luksusowym stylu Moncler</a>
+                        </h5>
+                        <small class="menu-post__date">28 lutego 2023</small>
+                    </article>
+                            </div>
+        </div>
+        </li>
+</ul></div>            <div class="header-navbar-select">
+                <a class="header-navbar-menu-button" href="#">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    więcej
+                </a>
+                <ul id="menu-hamburger" class="header-navbar-select-dropdown"><li id="menu-item-939" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-939"><a href="https://sznyt.pl/kategoria/design/architektura/">ARCHITEKTURA</a></li>
+<li id="menu-item-940" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-940"><a href="https://sznyt.pl/kategoria/gadzety/">GADŻETY</a></li>
+<li id="menu-item-941" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-941"><a href="https://sznyt.pl/kategoria/motocykle/">MOTOCYKLE</a></li>
+<li id="menu-item-942" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-942"><a href="https://sznyt.pl/kategoria/sneakersy/">SNEAKERSY</a></li>
+<li id="menu-item-943" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-943"><a href="https://sznyt.pl/kategoria/sport/outdoor/">OUTDOOR</a></li>
+<li id="menu-item-944" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-944"><a href="https://sznyt.pl/kategoria/stylzycia/jedzenie/">JEDZENIE &#038; PICIE</a></li>
+</ul>            </div>
+            <div class="header-facebook">
+                <facebook-button></facebook-button>
+            </div>
         </nav>
-    </header>
+    </div>
+</header>
 
-    <main>
-        <h1>Witaj w świecie motoryzacji!</h1>
-        <p>Odkryj najnowsze modele samochodów i galerie!</p>
-    </main>
+</affix>
+<section class="section banner esql-header-banner">
+    <div class="container">
+        <!-- sznyt_bill1 -->
+        <div id='dfp-sznyt-bill1'>
+            <script>
+              googletag.cmd.push(function() { googletag.display('dfp-sznyt-bill1'); });
+            </script>
+        </div>
+    </div>
+</section>
 
-    <footer>
-        <p>&copy; 2025 Motoryzacja</p>
-    </footer>
+        	    <section class="section has-sidebar is-article esql-article" data-url="/2020/03/03/najlepsze-usportowione-modele-samochodow/" data-fb-count="18">
+        <div class="container">
+            <div class="">
+                <article class="is-12 article is-single" id="post-25814">
+                    <div class="article-header">
+                        <h1 class="title">
+                            Usportowione modele samochod&oacute;w &#8211; ulubione i te, na kt&oacute;re czekamy
+                        </h1>
+                    </div>
+                    <div class="post-meta">
+    <div class="post-meta__date">
+         3 marca 2020
+    </div>
+
+
+    <!--<a href="https://sznyt.pl/2020/03/03/najlepsze-usportowione-modele-samochodow" class="button is-facebook post-meta__socials" v-social>-->
+        <!--<span>pokaż ten sznyt</span>-->
+        <!--<i class="fa fa-facebook"></i>-->
+        <!--<span class="post_meta__socials-count">18</span>-->
+    <!--</a>-->
+    
+    <facebook-button fb_count="18" :sticky="true"></facebook-button>
+
+    <div class="post-meta__categories">
+        <a href="/kategoria/motoryzacja/" class="post-meta__category">MOTO</a>    </div>
+</div>
+                                            <figure class="post-image ">
+                            <img src="https://sznyt.pl/wp-content/uploads/2020/03/HP-1096x600.jpg" alt="Usportowione modele samochod&oacute;w - ulubione i te, na kt&oacute;re czekamy">
+                        </figure>
+                                        <section class="section banner esql-header-banner">
+                        <div class="container">
+                            <!-- sznyt_bill2 -->
+                            <div id='dfp-sznyt-bill2'>
+                                <script>
+                                  googletag.cmd.push(function() { googletag.display('dfp-sznyt-bill2'); });
+                                </script>
+                            </div>
+                        </div>
+                    </section>
+                                            <div class="article-content">
+                    
+                        <p><strong>W związku z premierą nowych modeli Alfy Romeo, robimy przegląd ulubionych usportowionych wersji aut. Oto nasza subiektywna lista!</strong></p>
+<p><strong>Alfa Romeo Giulia GTA i GTAm</strong></p>
+<p>Mówi się, że nowe Alfy to legenda z technologią zaczerpnięta z Formuły 1. Dlaczego? Modele GTA i GTAm zostały oparte na flagowym modelu marki, czyli Giulii Quadrifoglio. Pierwszy z nich to tzw. wersja cywilna - drugi natomiast jest przeznaczony do jazdy po torze, dlatego otrzymał dwa kubełkowe fotele, klatkę bezpieczeństwa i sześciopunktowe pasy.</p>
+<p>Co zmienili projektanci w samej sylwetce? Przede wszystkim zmniejszyła się waga - nowa Giulia ważny aż o 100 kg mniej niż jej poprzedniczka. Udało się to osiągnąć za sprawą stworzenia wielu elementów z poliwęglanu, który jest trwały i bardzo lekki. Dodatkowo, jak na rasowe sportowe auto przystało, dodano dyfuzor i spojler, które poprawiają aerodynamikę i dodają wyglądowi pazura. Natomiast pod maską obu wersji kryje się benzynowy silnik 2.9 V6 Bi-turbo, który generuje 540 KM. Dzięki niemu osiągnięcie setki zajmuje zaledwie 3,6 sekundy.</p>
+<figure id="attachment_25815" aria-describedby="caption-attachment-25815" style="width: 5315px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/18.jpg"><img class="wp-image-25815 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/18.jpg" alt="" width="5315" height="3543" /></a><figcaption id="caption-attachment-25815" class="wp-caption-text">fot. Alfa Romeo</figcaption></figure>
+<p>Jeśli macie trochę odłożonej gotówki i chcielibyście kupić sobie usportowioną Giulię to musicie się spieszyć - Alfa Romeo wypuszcza na rynek zaledwie po 500 sztuk każdej wersji. Każdy kupujący GTA lub GTAm zostaje automatycznie ambasadorem marki i otrzymuje unikatowy sportowy strój oraz kask. Dodatkowo ma możliwość odbycia specjalnego kursu z Alfa Romeo Driving Academy.</p>
+<figure id="attachment_25816" aria-describedby="caption-attachment-25816" style="width: 1920px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/alfa-romeo-giulia-gta-7.jpg"><img class="wp-image-25816 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/alfa-romeo-giulia-gta-7.jpg" alt="" width="1920" height="1080" /></a><figcaption id="caption-attachment-25816" class="wp-caption-text">fot. Alfa Romeo</figcaption></figure>
+<p><strong>Toyota GR Yaris</strong></p>
+<p>Czekamy na tę premierę z niecierpliwością - Toyota ujawniła w końcu wygląd Yarisa GR i jesteśmy zaintrygowaniu nowym usportowionym modelem japońskiego koncernu. Jak zaznacza producent, Yaris GR powstał na bazie doświadczeń fabrycznego zespołu WRC, a o ścisłych wytycznych decydował sam Tommy Mäkinen - kierownik teamu Gazoo Racing. Nic więc dziwnego, że w tym małym sportowym aucie zastosowano najbardziej zaawansowane technicznie rozwiązania, które z pewnością sprawdzą się do jazdy na codzień i do zabawy na torze.</p>
+<p>Co jeszcze wiemy o hiperhatchu Toyoty? Model będzie miał silnik 1.6 turbo (261 KM) i będzie ważył 1280 kg. Niewiadomą pozostaje czas przyspieszenia 0-100 km/h, ale Toyota na razie podaje, że będzie to „mniej niż 5,5 s”.</p>
+<figure id="attachment_25844" aria-describedby="caption-attachment-25844" style="width: 1680px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/11111_tcm-3031-1836822.jpg"><img class="wp-image-25844 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/11111_tcm-3031-1836822.jpg" alt="" width="1680" height="1021" /></a><figcaption id="caption-attachment-25844" class="wp-caption-text">fot. Toyota</figcaption></figure>
+<figure id="attachment_25845" aria-describedby="caption-attachment-25845" style="width: 1600px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/home_header_tcm-1015-1838303.jpg"><img class="wp-image-25845 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/home_header_tcm-1015-1838303.jpg" alt="" width="1600" height="964" /></a><figcaption id="caption-attachment-25845" class="wp-caption-text">fot. Toyota</figcaption></figure>
+<p><strong>Renault Megane RS Trophy</strong></p>
+<p>Małe a jakie zwinne i szybkie! Renault Megane RS w standardowej odmianie ma silnik 1,8 turbo o mocy 280 km - w wersji Trophy zwiększono moc do 300 km. Auto potrzebuje zaledwie 5,7 s aby rozpędzić się od 0 do 100 km/h (o 0,1 s szybciej), a prędkość maksymalna wynosi 260 km/h (o 5 km/h).</p>
+<p>Jeśli chodzi o moment obrotowy to w przypadku skrzyni manualnej wynosi on 400 Nm, ale jeśli zdecydujemy się na 2-sprzegłową skrzynię automatyczną EDC jest to 420 Nm.</p>
+<figure id="attachment_25818" aria-describedby="caption-attachment-25818" style="width: 1324px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/zzz-6.jpg"><img class="wp-image-25818 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/zzz-6.jpg" alt="" width="1324" height="745" /></a><figcaption id="caption-attachment-25818" class="wp-caption-text">fot. Renault</figcaption></figure>
+<figure id="attachment_25819" aria-describedby="caption-attachment-25819" style="width: 972px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/zzz-4.jpg"><img class="wp-image-25819 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/zzz-4.jpg" alt="" width="972" height="547" /></a><figcaption id="caption-attachment-25819" class="wp-caption-text">fot. Renault</figcaption></figure>
+<figure id="attachment_25820" aria-describedby="caption-attachment-25820" style="width: 1096px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/tttt-1-1096x600.jpg"><img class="wp-image-25820 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/tttt-1-1096x600.jpg" alt="" width="1096" height="600" /></a><figcaption id="caption-attachment-25820" class="wp-caption-text">fot. Renault</figcaption></figure>
+<p><strong>Škoda Octavia RS 245</strong></p>
+<p>Praktyczny i dynamiczny - j<a href="https://sznyt.pl/2018/02/16/skoda-octavia-rs-245-najmocniejsza/" target="_blank" rel="noopener">akiś czas temu mieliśmy przyjemność przetestować nowy model Octavii</a>, który swoją stylistyką znacząco odróżnia się od swoich poprzedników. Design jest odważny, agresywny i nowoczesny. Niewiele już w Octavii zostało ciężkości i siermiężności, którą pamiętamy z modeli produkowanych jako pierwsza generacja w końcu lat 90-tych XX wieku i nam się to bardzo podoba. W nasze ręce wpadł egzemplarz w praktycznej wersji nadwozia liftback, ale jeśli 590-litrowy bagażnik jest dla Was za mały, Octavia RS 245 dostępna jest również jako combi (610 l). Obie wersję osiągają prędkość maksymalną 250 km/h i rozpędzają się do 100 km/h w czasie - odpowiednio, 6,6 i 6,7 sekundy.</p>
+<p>Oprócz wyglądu od "standardowej" wersji RS oczywiście odróżnia ją również zwiększona moc silnika (bazowo 230 KM) oraz specjalny pakiet stylistyczny, w którego skład wchodzą lakierowane na czarno 19-calowe felgi, końcówki wydechów, zestaw listw oraz coś, co specjalnie ucieszy fanów prawdziwie sportowej jazdy - blokada mechanizmu różnicowego.</p>
+<figure id="attachment_25842" aria-describedby="caption-attachment-25842" style="width: 1124px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/2017_02_08_octavia_rs2.504c8457be397f0d93d76d9300782212.fit-1450x760.jpg"><img class="size-full wp-image-25842" src="https://sznyt.pl/wp-content/uploads/2020/03/2017_02_08_octavia_rs2.504c8457be397f0d93d76d9300782212.fit-1450x760.jpg" alt="" width="1124" height="760" /></a><figcaption id="caption-attachment-25842" class="wp-caption-text">fot. Škoda</figcaption></figure>
+<figure id="attachment_25843" aria-describedby="caption-attachment-25843" style="width: 1200px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/octavia-rs-245-2.1200.jpg"><img class="wp-image-25843 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/octavia-rs-245-2.1200.jpg" alt="" width="1200" height="675" /></a><figcaption id="caption-attachment-25843" class="wp-caption-text">fot. Škoda</figcaption></figure>
+<p><strong><br />
+Ford Focus RS III</strong></p>
+<p>W 2015 roku Ford zaprezentował nową odmianę RS, która powstała na bazie III generacji Focusa. Z pewnością to najciekawsza sportowa odmiana tego modelu, który zyskał już całą rzeszę fanów na świecie. Auto napędzane jest 2,3 litrowym, turbodoładowanym (twin-scroll) silnikiem Ecoboost o mocy 350 KM i ma system napędu 4x4 Ford Performance All-Wheel-Drive. Z takim napędem osiągniemy setkę w 4,7 sekundy.</p>
+<p>Według zapowiedzi Ford szykuje premierę swojego nowego modelu RS, która miałaby się odbyć w drugiej połowie 2020 roku. Jeśli wierzyć plotkom, pod maską znajdzie się ten sam silnik 2.3 R4, ale połączony z silnikiem elektrycznym zdolnym napędzać tylko tylną oś (łącznie ponad 400 KM). Będzie to innowacyjny system eTwinster, nad którym pracuje firma GKN Automotive.</p>
+<figure id="attachment_25828" aria-describedby="caption-attachment-25828" style="width: 960px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/Ford-Focus-RS-III-2015_04.jpg"><img class="size-full wp-image-25828" src="https://sznyt.pl/wp-content/uploads/2020/03/Ford-Focus-RS-III-2015_04.jpg" alt="" width="960" height="540" /></a><figcaption id="caption-attachment-25828" class="wp-caption-text">fot. Ford Focus</figcaption></figure>
+<figure id="attachment_25829" aria-describedby="caption-attachment-25829" style="width: 960px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/3U1A7910.jpg"><img class="size-full wp-image-25829" src="https://sznyt.pl/wp-content/uploads/2020/03/3U1A7910.jpg" alt="" width="960" height="540" /></a><figcaption id="caption-attachment-25829" class="wp-caption-text">fot. Ford Focus</figcaption></figure>
+<p><strong>Seat Leon Cupra</strong></p>
+<p>Cupra Leon w wariancie spalinowym ma odpowiednio 300 i 310 KM, natomiast jako hybryda – 245 KM. Ta najmocniejsza opcja dostępna jedynie w wersji Sports Tourer, czyli jako kombi. Podstawowym wariantem jest jednak hybryda oparta na silniku 1,4 TSI, który zapewnia 400 Nm maksymalnego momentu obrotowego. Na jednym naładowaniu przejedziemy autem około 60 km. Najmocniejsza wersja – czyli 310-konna Cupra Leon z silnikiem spalinowym – osiąga setkę w mniej niż 5 sekund. Co istotne, wszystkie warianty posiadają wyłącznie automatyczną przekładnię DSG.</p>
+<p>Warta wspomnienia jest również unowocześniona linia nadwozia i wyrafinowane wykończenie nowego modelu: chromowane pedały, aluminiowe progi drzwi, elektrycznie otwierany dach panoramiczny, kubełkowe fotele. Dzięki tym detalom zupełnie inaczej patrzymy na dobrze nam znany model Seata.</p>
+<figure id="attachment_25840" aria-describedby="caption-attachment-25840" style="width: 1000px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/CUPRA-opens-the-doors-of-its-new-headquarters-with-the-debut-of-the-first-CUPRA-Leon_05_HQ.jpg"><img class="wp-image-25840 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/CUPRA-opens-the-doors-of-its-new-headquarters-with-the-debut-of-the-first-CUPRA-Leon_05_HQ.jpg" alt="" width="1000" height="648" /></a><figcaption id="caption-attachment-25840" class="wp-caption-text">fot. Seat</figcaption></figure>
+<figure id="attachment_25841" aria-describedby="caption-attachment-25841" style="width: 1096px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/audi-r8-2019-04-1440x960-1.jpg"><img class="wp-image-25841 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/audi-r8-2019-04-1440x960-1.jpg" alt="" width="1096" height="600" /></a><figcaption id="caption-attachment-25841" class="wp-caption-text">fot. Seat</figcaption></figure>
+<p><strong>Mk8 Volkswagen Golf GTI 2020</strong></p>
+<p>Zgadza się - Mk8 Volkswagen nie może być jeszcze naszym "ulubionym usportowionym modelem", ale nie ukrywamy, że pokładamy w tym modelu duże nadzieje. Dlaczego? Samochód, którego premiera ma się odbyć tego lata, będzie wyposażony w czterocylindrowy silnik z turbodoładowaniem, który przekazuje moc na przednie koła. Co ważne, ta moc będzie przekładana przez nowo opracowaną sześciobiegową manualną skrzynię biegów lub siedmiobiegowy automat DSG z manetkami łopatkowymi. Jak zapowiada producent, przyspieszenie do 100 km/h będzie w tym samochodzie osiągalne w zaledwie 6,4 sekundy.</p>
+<p>Mamy nadzieję, że Volkswagen nie zawiedzie i nowy model faktycznie będzie jeszcze lepszy niż ostatni Golf GTI w wersji Performance Package.</p>
+<figure id="attachment_25821" aria-describedby="caption-attachment-25821" style="width: 1300px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/oto-mk8-volkswagen-golf-gti-2020-8.jpg"><img class="wp-image-25821 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/oto-mk8-volkswagen-golf-gti-2020-8.jpg" alt="" width="1300" height="866" /></a><figcaption id="caption-attachment-25821" class="wp-caption-text">fot. Volkswagen</figcaption></figure>
+<figure id="attachment_25822" aria-describedby="caption-attachment-25822" style="width: 1300px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/oto-mk8-volkswagen-golf-gti-2020-6.jpg"><img class="wp-image-25822 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/oto-mk8-volkswagen-golf-gti-2020-6.jpg" alt="" width="1300" height="866" /></a><figcaption id="caption-attachment-25822" class="wp-caption-text">fot. Volkswagen</figcaption></figure>
+<figure id="attachment_25823" aria-describedby="caption-attachment-25823" style="width: 1300px" class="wp-caption alignnone"><a class="gallery" href="https://sznyt.pl/wp-content/uploads/2020/03/oto-mk8-volkswagen-golf-gti-2020-5.jpg"><img class="wp-image-25823 size-full" src="https://sznyt.pl/wp-content/uploads/2020/03/oto-mk8-volkswagen-golf-gti-2020-5.jpg" alt="" width="1300" height="866" /></a><figcaption id="caption-attachment-25823" class="wp-caption-text">fot. Volkswagen</figcaption></figure>
+                        <div class="article-content__caption">
+        tekst: A.R
+    </div>
+                    </div>
+                    <div class="article-footer">
+        <div class="article-comment-button">
+            <a href="https://sznyt.pl/2020/03/03/najlepsze-usportowione-modele-samochodow" class="article-comment-button__link article-comment-button__link--facebook" v-social>
+                <span class="article-comment-button__text">Pokaż ten sznyt!</span>
+                <i class="fa fa-facebook"></i>
+                <span class="article-comment-button__counter">18</span>
+            </a>
+            <a href="https://sznyt.pl/2020/03/03/najlepsze-usportowione-modele-samochodow" class="article-comment-button__link article-comment-button__link--disqus" v-disqus data-post-id="25814">
+                <span class="article-comment-button__text">I co o tym sądzisz?</span>
+                <img src="https://sznyt.pl/wp-content/themes/sznyt/assets/images/comment.svg" alt="">
+                <span class="article-comment-button__counter">0</span>
+            </a>
+        </div>
+</div>
+                    <div class="article-comments is-hidden" data-post="25814">
+    <a name="comments"></a>
+    <disqus shortname="sznyt" identifier="25814" url="https://sznyt.pl/2020/03/03/najlepsze-usportowione-modele-samochodow/"></disqus>
+</div>
+                    <section class="recommended-articles recommended-articles--hidden" v-bind:class="{'recommended-articles--visible': showRecommendedArticles}">
+    <div class="recommended-articles__title">tego nie przegap</div>
+    <div class="recommended-articles__inner">
+            </div>
+    <div class="recommended-articles__close-button" v-on:click="hideRecommendedArticles"></div>
+</section>
+                </article>
+            </div>
+        </div>
+    </section>
+    	    <esql-infinity-scroll
+    :id="25814"
+    :ids="[]"
+    :inject="[]"
+    :sidebar-posts="[]"
+></esql-infinity-scroll>
+    <div class="js-home-page-url-watch"></div>
+        <div class="esql-grid-slider-container">
+
+        <esql-grid-slider class="esql-grid-slider" v-cloak>
+                    </esql-grid-slider>
+
+    </div>
+
+<section class="section">
+    <div class="container">
+        <h2 class="home-page-title">
+            <span>sznyt tygodnia</span>
+        </h2>
+    </div>
+</section>
+
+<section class="top-posts container">
+    <div class="top-posts__inner">
+        <div class="top-posts__list">
+                                </div>
+        <section class="top-posts__aside">
+            <div id='dfp-sznyt-half-sg'>
+                <script>
+                    googletag.cmd.push(function() { googletag.display('dfp-sznyt-half-sg'); });
+                </script>
+            </div>
+        </section>
+    </div>
+    <section class="section banner esql-header-banner">
+        <div class="container">
+        <!-- sznyt_bill2 -->
+            <div id='dfp-sznyt-bill2'>
+                <script>
+                  googletag.cmd.push(function() { googletag.display('dfp-sznyt-bill2'); });
+                </script>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="home-page-title">
+            <span>najnowsze</span>
+        </h2>
+    </div>
+</section>
+
+    <section class="section is-row">
+    <div class="container">
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2024/03/22/bioceramic-moonswatch-mission-moonphase-wyladowal/">
+                <img src="https://sznyt.pl/wp-content/uploads/2024/03/sc01_24_BioceramicMoonSwatch_MissionToTheMoonphase_close-up-moonphase-night-733x378.jpg" alt="Bioceramic MoonSwatch MISSION TO THE MOONPHASE wylądował<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>STYL ŻYCIA</span>
+                            <span>GADŻETY</span>
+                            <span>DESIGN</span>
+                            <span>MODA</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2024/03/22/bioceramic-moonswatch-mission-moonphase-wyladowal/">Bioceramic MoonSwatch MISSION TO THE MOONPHASE wylądował</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>22 marca 2024</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2024/03/22/edc-wedlug-sznyt-gdzie-styl-spotyka-funkcjonalnosc/">
+                <img src="https://sznyt.pl/wp-content/uploads/2024/03/taylor-kopel-DkH2X5NzHnc-unsplash-733x378.jpg" alt="EDC według Sznyt &ndash; gdzie styl spotyka funkcjonalność<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>STYL ŻYCIA</span>
+                            <span>TECH</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2024/03/22/edc-wedlug-sznyt-gdzie-styl-spotyka-funkcjonalnosc/">EDC według Sznyt &ndash; gdzie styl spotyka funkcjonalność</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>22 marca 2024</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2024/02/27/fauna-flora-w-modzie-kwieciste-nowosci-wprost-ze-sklepu-odziezowego/">
+                <img src="https://sznyt.pl/wp-content/uploads/2024/02/2fc0cdc3811f9570e0d45c1160c67204f40a16d9-733x378.jpg" alt="Fauna i flora w modzie: kwieciste nowości wprost ze sklepu odzieżowego<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>MODA</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2024/02/27/fauna-flora-w-modzie-kwieciste-nowosci-wprost-ze-sklepu-odziezowego/">Fauna i flora w modzie: kwieciste nowości wprost ze sklepu odzieżowego</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>27 lutego 2024</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2024/02/19/podroz-przez-japonskie-pory-roku-odkryj-ich-esencje-w-niezwyklym-przewodniku-roku-gin-pairing-guide/">
+                <img src="https://sznyt.pl/wp-content/uploads/2024/02/gin-733x378.jpg" alt="Podr&oacute;ż przez japońskie pory roku &ndash; odkryj ich esencję w niezwykłym przewodniku &bdquo;Roku Gin Pairing Guide&rdquo;<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>STYL ŻYCIA</span>
+                            <span>JEDZENIE &amp; PICIE</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2024/02/19/podroz-przez-japonskie-pory-roku-odkryj-ich-esencje-w-niezwyklym-przewodniku-roku-gin-pairing-guide/">Podr&oacute;ż przez japońskie pory roku &ndash; odkryj ich esencję w niezwykłym przewodniku &bdquo;Roku Gin Pairing Guide&rdquo;</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>19 lutego 2024</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2023/12/07/toyota-bz4x-tak-wyglada-przyszlosc/">
+                <img src="https://sznyt.pl/wp-content/uploads/2023/12/PL_Toyota_bZ4X_2023x1099_Sellout_December_v6-733x378.jpg" alt="Toyota bZ4X - tak wygląda przyszłość?<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>MOTO</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2023/12/07/toyota-bz4x-tak-wyglada-przyszlosc/">Toyota bZ4X - tak wygląda przyszłość?</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>7 grudnia 2023</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2023/11/17/buty-damskie-na-jesien-styl-komfort-funkcjonalnosc-w-jednym/">
+                <img src="https://sznyt.pl/wp-content/uploads/2023/11/buty-damskie-na-jesien-styl-komfort-i-funkcjonalnosc-w-jednym-733x378.jpg" alt="Buty damskie na jesień - styl, komfort i funkcjonalność w jednym<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>STYL ŻYCIA</span>
+                            <span>SNEAKERSY</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2023/11/17/buty-damskie-na-jesien-styl-komfort-funkcjonalnosc-w-jednym/">Buty damskie na jesień - styl, komfort i funkcjonalność w jednym</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>17 listopada 2023</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2023/10/30/8-najlepszych-adwentowych-kalendarzy-z-alkoholem/">
+                <img src="https://sznyt.pl/wp-content/uploads/2018/11/tmg-article_main_wide_2x-733x378.jpg" alt="8 najlepszych adwentowych kalendarzy z alkoholem<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>GADŻETY</span>
+                            <span>JEDZENIE &amp; PICIE</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2023/10/30/8-najlepszych-adwentowych-kalendarzy-z-alkoholem/">8 najlepszych adwentowych kalendarzy z alkoholem</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>30 października 2023</span>
+            </div>
+
+                            <a href="/2023/10/30/8-najlepszych-adwentowych-kalendarzy-z-alkoholem/" class="label is-facebook" v-social>
+                    <i class="fa fa-facebook"></i>
+                    87
+                </a>
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2023/10/27/jesienne-inspiracje-stylowe-polaczenia-obuwia-z-reszta-odziezy-na-chlodniejsze-dni/">
+                <img src="https://sznyt.pl/wp-content/uploads/2023/10/lasocki-damskie-733x378.jpg" alt="Jesienne inspiracje - stylowe połączenia obuwia z resztą odzieży na chłodniejsze dni<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2023/10/27/jesienne-inspiracje-stylowe-polaczenia-obuwia-z-reszta-odziezy-na-chlodniejsze-dni/">Jesienne inspiracje - stylowe połączenia obuwia z resztą odzieży na chłodniejsze dni</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>27 października 2023</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+            </div>
+</section>
+
+
+    <section class="section is-row">
+    <div class="container">
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2023/10/10/whisky-live-warsaw-w-jubileuszowej-odslonie/">
+                <img src="https://sznyt.pl/wp-content/uploads/2023/10/WLW_VI-733x378.jpg" alt="Whisky Live Warsaw w jubileuszowej odsłonie<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>JEDZENIE &amp; PICIE</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2023/10/10/whisky-live-warsaw-w-jubileuszowej-odslonie/">Whisky Live Warsaw w jubileuszowej odsłonie</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>10 października 2023</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2023/10/09/levis-x-crocs-nowa-kooperacja-znanych-marek/">
+                <img src="https://sznyt.pl/wp-content/uploads/2023/10/image_processing20231006-2800533-1whd1e0-733x378.jpg" alt="Levis x Crocs. Nowa kooperacja znanych marek<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2023/10/09/levis-x-crocs-nowa-kooperacja-znanych-marek/">Levis x Crocs. Nowa kooperacja znanych marek</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>9 października 2023</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2023/10/08/swarovski-creators-lab-swietuje-75-jubileusz-marki-puma/">
+                <img src="https://sznyt.pl/wp-content/uploads/2023/10/Swarovski_Creators-Lab_PUMA_300dpi-7-733x378.jpg" alt="Swarovski Creators Lab świętuje 75. jubileusz marki PUMA<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>MODA</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2023/10/08/swarovski-creators-lab-swietuje-75-jubileusz-marki-puma/">Swarovski Creators Lab świętuje 75. jubileusz marki PUMA</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>8 października 2023</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2023/09/01/akustyczne-estetyczne-arcydziela-testujemy-glosniki-sonos-era-100-sonos-era-300/">
+                <img src="https://sznyt.pl/wp-content/uploads/2023/08/sonos-sznyt9-1-733x378.jpg" alt="Akustyczne arcydzieła? Testujemy głośniki Sonos Era 100 i Sonos Era 300<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>TECH</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2023/09/01/akustyczne-estetyczne-arcydziela-testujemy-glosniki-sonos-era-100-sonos-era-300/">Akustyczne arcydzieła? Testujemy głośniki Sonos Era 100 i Sonos Era 300</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>1 września 2023</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2023/08/24/romantyczna-odslona-rolls-roycea-jedyne-w-swoim-rodzaju-la-rose-noire-droptail/">
+                <img src="https://sznyt.pl/wp-content/uploads/2023/08/P90519236_lowRes_rolls-royce-la-rose--733x378.jpg" alt="Romantyczna odsłona Rolls Royce&#039;a - jedyne w swoim rodzaju La Rose Noire Droptail<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>MOTO</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2023/08/24/romantyczna-odslona-rolls-roycea-jedyne-w-swoim-rodzaju-la-rose-noire-droptail/">Romantyczna odsłona Rolls Royce&#039;a - jedyne w swoim rodzaju La Rose Noire Droptail</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>24 sierpnia 2023</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+                    <article class="post">
+    <figure class="post-thumbnail">
+                    <a href="/2023/08/16/bmw/">
+                <img src="https://sznyt.pl/wp-content/uploads/2023/08/glowne-1-733x378.png" alt="Hybryda rodzinnego auta ze sportową bestią? Nasze wrażenia po jeździe BMW M3 Touring<">
+            </a>
+        
+    </figure>
+    <div class="post-inner">
+
+        <div class="post-category">
+                            <span>MOTO</span>
+                    </div>
+
+        <h3 class="post-title">
+            <a href="/2023/08/16/bmw/">Hybryda rodzinnego auta ze sportową bestią? Nasze wrażenia po jeździe BMW M3 Touring</a>
+        </h3>
+
+
+        <div class="post-footer">
+
+            <div class="post-date">
+                <span>16 sierpnia 2023</span>
+            </div>
+
+                    </div>
+    </div>
+</article>
+            </div>
+</section>
+
+    <article-loader :skip="14"></article-loader>
+
+
+    <newsletter-subscription
+        :enabled="false"
+></newsletter-subscription>
+
+<footer class="footer-section">
+    <div class="container">
+        <div class="footer">
+            <div class="footer__left">
+                <a class="footer__search" href="" @click.prevent="toggleSearchBox">
+                    <span class="footer__search-icon">
+                        <i class="fa fa-search"></i>
+                    </span>
+                    o czym marzysz?
+                </a>
+
+                <ul id="menu-menu-w-stopce" class="footer__bottom-nav"><li id="menu-item-973" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-973"><a href="https://sznyt.pl/o-nas/">O nas</a></li>
+<li id="menu-item-974" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-974"><a href="https://sznyt.pl/kontakt/">Kontakt</a></li>
+<li id="menu-item-11280" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11280"><a href="https://sznyt.pl/polityka-prywatnosci/">Polityka prywatności</a></li>
+<li id="menu-item-11498" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11498"><a href="https://sznyt.pl/praca-redaktor-researcher/">Praca</a></li>
+</ul>
+            </div>
+            <div class="footer__center">
+                <div class="footer__copyright">
+                    <img class="footer__logo" src="https://sznyt.pl/wp-content/themes/sznyt/assets/images/sznyt-logo-inverse.svg" alt="Sznyt.pl">
+                    <div class="footer__copyright-text">
+                    copyright &copy;2024 sznyt
+                    </div>
+                </div>
+            </div>
+            <div class="footer__right">
+                <div class="footer__social-links">
+                    <a class="footer__social-link" href="https://www.facebook.com/sznytpl/" target="_blank">
+                        <span class="footer__social-icon">
+                            <i class="fa fa-facebook"></i>
+                        </span>
+                        facebook
+                    </a>
+                    <a class="footer__social-link" href="https://www.instagram.com/sznyt.pl/" target="_blank">
+                        <span class="footer__social-icon">
+                            <i class="fa fa-instagram"></i>
+                        </span>
+                        instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<search @close="toggleSearchBox" :show="showSearch"></search>
+<!-- sznyt_half -->
+<div id='dfp-sznyt-half'>
+    <script>
+      googletag.cmd.push(function() { googletag.display('dfp-sznyt-half'); });
+    </script>
+</div>
+
+</div>
+<!-- ///cache -->
+<script type='text/javascript' src='https://sznyt.pl/backend/wp-includes/js/wp-embed.min.js?ver=5.9.9' id='wp-embed-js'></script>
+<script>
+  var asset_path = "https://sznyt.pl/wp-content/themes/sznyt/assets/";
+</script>
+<script src="https://sznyt.pl/wp-content/themes/sznyt/assets/js/app.js?v=1.4.26" async></script>
 </body>
 </html>
